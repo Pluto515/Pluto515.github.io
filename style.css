@@ -63,3 +63,11 @@ button[type="submit"] {
 button[type="submit"]:hover {
     background-color: #e65c00;
 }
+
+/* Discord Widget Styling */
+iframe {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 20px auto;
+    display: block;
+}
