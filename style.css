@@ -28,9 +28,38 @@ button {
     cursor: pointer;
 }
 
-#visitor-count {
-    font-size: 30px;
-    font-weight: bold;
-    color: #ff6600;
-    margin-top: 20px;
+/* Contact Form Styling */
+form {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    margin: 40px auto;
+    text-align: left;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #444;
+    color: #fff;
+}
+
+button[type="submit"] {
+    background-color: #ff6600;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+    background-color: #e65c00;
 }

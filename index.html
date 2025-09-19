@@ -6,15 +6,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hello from Pluto515! And Thanks for Visting my Website!</h1>
+    <h1>Hello from Pluto515! and thanks for visting my website :3</h1>
     <p>This website is hosted on GitHub Pages 🚀</p>
 
     <!-- Dark Mode Toggle Button -->
     <button id="darkModeToggle">Switch to Dark Mode</button>
 
-    <!-- Live Visitor Counter -->
-    <h2>Visitors:</h2>
-    <p id="visitor-count">0</p>
+    <!-- Contact Form -->
+    <h2>Contact Me or Suggest Ideas for the website</h2>
+    <form action="https://formsubmit.co/Watson515@proton.me" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required><br><br>
+        <input type="email" name="email" placeholder="Your Email" required><br><br>
+        <textarea name="message" placeholder="Your Message" required></textarea><br><br>
+        <button type="submit">Send Message</button>
+        <!-- Redirect to a thank-you page after submission -->
+        <input type="hidden" name="_next" value="https://Pluto515.github.io/thank-you.html">
+        <input type="hidden" name="_captcha" value="false">
+    </form>
 
     <script>
         // Dark mode toggle
@@ -36,19 +44,6 @@
                 toggle.textContent = "Switch to Dark Mode";
             }
         });
-
-        // Live visitor counter
-        const countEl = document.getElementById('visitor-count');
-        const namespace = "pluto515"; // Unique namespace
-        const key = "homepage"; // Unique key for this page
-
-        async function updateVisitorCount() {
-            const response = await fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`);
-            const data = await response.json();
-            countEl.textContent = data.value;
-        }
-
-        updateVisitorCount();
     </script>
 </body>
 </html>
