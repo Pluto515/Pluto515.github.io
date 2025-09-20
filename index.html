@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hello from Pluto515!</h1>
+    <h1>Hello from Pluto515! and Thanks for Visting my website :3</h1>
     <p>This website is hosted on GitHub Pages 🚀</p>
 
     <!-- Dark Mode Toggle Button -->
@@ -24,24 +24,14 @@
         <input type="hidden" name="_captcha" value="false">
     </form>
 
-    <!-- Discord Widget -->
-    <h2>Join My Discord!</h2>
-    <iframe id="discordWidget"
-        src="https://discord.com/widget?id=YOUR_SERVER_ID&theme=light"
-        width="350" height="500" allowtransparency="true" frameborder="0"
-        sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
-    </iframe>
-
     <script>
+        // Dark mode toggle
         const toggle = document.getElementById('darkModeToggle');
-        const discordWidget = document.getElementById('discordWidget');
-        const serverId = "YOUR_SERVER_ID"; // replace with your actual ID
 
         // Load saved theme preference
         if(localStorage.getItem('theme') === 'dark'){
             document.body.classList.add('dark-mode');
             toggle.textContent = "Switch to Light Mode";
-            discordWidget.src = `https://discord.com/widget?id=${serverId}&theme=dark`;
         }
 
         toggle.addEventListener('click', () => {
@@ -49,11 +39,9 @@
             if(document.body.classList.contains('dark-mode')){
                 localStorage.setItem('theme', 'dark');
                 toggle.textContent = "Switch to Light Mode";
-                discordWidget.src = `https://discord.com/widget?id=${serverId}&theme=dark`;
             } else {
                 localStorage.setItem('theme', 'light');
                 toggle.textContent = "Switch to Dark Mode";
-                discordWidget.src = `https://discord.com/widget?id=${serverId}&theme=light`;
             }
         });
     </script>
