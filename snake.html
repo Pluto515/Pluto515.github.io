@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Snake — Touch Friendly</title>
+  <style>
+    body { margin:0; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; background:#222; color:#fff; touch-action:none; }
+    canvas { background:#000; display:block; }
+    #controls { margin-top:10px; display:flex; gap:10px; }
+    #controls button { padding:10px 20px; font-size:18px; }
+    #scoreboard { margin-bottom: 5px; font-size: 20px; }
+  </style>
+</head>
+<body>
+
+<div id="scoreboard">Score: 0</div>
+<canvas id="game" width="300" height="300"></canvas>
+
+<div id="controls">
+  <button id="up">↑</button>
+  <button id="left">←</button>
+  <button id="down">↓</button>
+  <button id="right">→</button>
+</div>
+
+<script>
+  const canvas = document.getElementById('game');
+  const ctx = canvas.getContext('2d');
+  const scoreboardDiv = document.getElementById('scoreboard');
+
+  const scale = 20;
+  const rows = canvas.height / scale;
+  const cols = canvas.width / scale;
+
+  let snake = [{ x: 10, y: 10 }];
+  let dir = { x: 0, y: 0 };
+  let food = randomFood();
+  let gameOver = false;
+  let score = 0;
+
+  function randomFood() {
+    return {
+      x: Math.floor(Math.random() * cols),
+      y: Math.floor(Math.random() * rows)
+    };
+  }
+
+  function draw() {
+    if (gameOver) return;
+
+    ctx.fillStyle = 'black';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // draw food
+    ctx.fillStyle = 'red';
+    ctx.fillRect(food.x * scale, food.y * scale, scale, scale);
+
+    // move snake
+    const head = { x: snake[0].x + dir.x, y: snake[0].y + dir.y };
+    snake.unshift(head);
+
+    // check food eaten
+    if (head.x === food.x && head.y === food.y) {
+      score += 1;  // increase score by 1 (or any value you prefer)
+      scoreboardDiv.innerText = 'Score: ' + score;
+      food = randomFood();
+    } else {
+      snake.pop();
+    }
+
+    // draw snake
+    ctx.fillStyle = 'lime';
+    snake.forEach(s => {
+      ctx.fillRect(s.x * scale, s.y * scale, scale, scale);
+    });
+
+    // check collisions
+    if (
+      head.x < 0 || head.x >= cols ||
+      head.y < 0 || head.y >= rows ||
+      snake.slice(1).some(seg => seg.x === head.x && seg.y === head.y)
+    ) {
+      gameOver = true;
+      alert('Game Over! Your score: ' + score + '. Refresh to play again.');
+      return;
+    }
+  }
+
+  function gameLoop() {
+    setTimeout(() => {
+      draw();
+      if (!gameOver) gameLoop();
+    }, 150);
+  }
+
+  gameLoop();
+
+  // controls (keyboard / touch / buttons) remain same ...
+  window.addEventListener('keydown', e => { /* etc */ });
+  document.getElementById('up').onclick = () => dir = { x: 0, y: -1 };
+  document.getElementById('down').onclick = () => dir = { x: 0, y: 1 };
+  document.getElementById('left').onclick = () => dir = { x: -1, y: 0 };
+  document.getElementById('right').onclick = () => dir = { x: 1, y: 0 };
+
+  let startX = null, startY = null;
+  canvas.addEventListener('touchstart', e => { const t = e.touches[0]; startX = t.clientX; startY = t.clientY; });
+  canvas.addEventListener('touchmove', e => {
+    if (!startX || !startY) return;
+    const t = e.touches[0];
+    const dx = t.clientX - startX;
+    const dy = t.clientY - startY;
+    if (Math.abs(dx) > Math.abs(dy)) {
+      dir = dx > 0 ? { x: 1, y: 0 } : { x: -1, y: 0 };
+    } else {
+      dir = dy > 0 ? { x: 0, y: 1 } : { x: 0, y: -1 };
+    }
+    startX = null; startY = null;
+  });
+</script>
+
+</body>
+</html>
