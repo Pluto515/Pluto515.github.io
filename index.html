@@ -6,11 +6,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hello from Pluto515! and Thanks for Visting my website :3</h1>
+    <h1>Hello from Pluto515! and Thanks for Visiting my website :3</h1>
     <p>This website is hosted on GitHub Pages 🚀</p>
 
     <!-- Dark Mode Toggle Button -->
     <button id="darkModeToggle">Switch to Dark Mode</button>
+
+    <!-- Link/ Button to Snake Game -->
+    <div style="margin: 20px 0;">
+      <button onclick="window.location.href='snake.html'">Play Snake Game 🐍</button>
+    </div>
 
     <!-- Contact Form -->
     <h2>Contact Me or Suggest what to add!</h2>
@@ -29,14 +34,14 @@
         const toggle = document.getElementById('darkModeToggle');
 
         // Load saved theme preference
-        if(localStorage.getItem('theme') === 'dark'){
+        if (localStorage.getItem('theme') === 'dark') {
             document.body.classList.add('dark-mode');
             toggle.textContent = "Switch to Light Mode";
         }
 
         toggle.addEventListener('click', () => {
             document.body.classList.toggle('dark-mode');
-            if(document.body.classList.contains('dark-mode')){
+            if (document.body.classList.contains('dark-mode')) {
                 localStorage.setItem('theme', 'dark');
                 toggle.textContent = "Switch to Light Mode";
             } else {
