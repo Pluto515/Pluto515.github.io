@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watson | Developer Portfolio</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">Watson</div>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="javascript:void(0)" onclick="showAdminLogin()">Admin</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container">
+        <h1>Welcome to Watson</h1>
+        <p>Building high-performance solutions on Windows & Xubuntu</p>
+        <button class="btn" onclick="document.getElementById('blog').scrollIntoView({behavior: 'smooth'})">Explore Projects</button>
+      </div>
+    </section>
+
+    <section id="blog" class="container">
+      <div class="content">
+        <h2>Blog & Technical Notes</h2>
+        <div class="blog-posts">
+          <!-- Posts are injected by script.js -->
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="container">
+      <div class="content">
+        <h2>Contact Me</h2>
+        <p>Have a question or want to work together? Send a message!</p>
+        
+        <!-- Updated to FormSubmit for Watson515@proton.me -->
+        <form action="https://formsubmit.co/Watson515@proton.me" method="POST" class="contact-form">
+          <!-- Honeypot to prevent spam -->
+          <input type="text" name="_honey" style="display:none">
+          <!-- Disable Captcha for easier testing -->
+          <input type="hidden" name="_captcha" value="false">
+          
+          <div class="form-group">
+            <input type="text" name="name" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Your Email" required>
+          </div>
+          <div class="form-group">
+            <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Admin Panel Modal -->
+  <div id="adminModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeAdminModal()">&times;</span>
+      
+      <div id="adminLogin" class="admin-section">
+        <h2>Admin Access</h2>
+        <input type="password" id="adminPassword" placeholder="Enter admin password">
+        <button onclick="loginAdmin()" class="btn">Login</button>
+      </div>
+
+      <div id="adminDashboard" class="admin-section" style="display: none;">
+        <h2>Admin Dashboard</h2>
+        <button onclick="showAddBlogForm()" class="btn">+ New Post</button>
+        <div id="addBlogForm" style="display: none;">
+          <input type="text" id="blogTitle" placeholder="Title">
+          <input type="text" id="blogCategory" placeholder="Category">
+          <textarea id="blogExcerpt" placeholder="Excerpt"></textarea>
+          <textarea id="blogContent" placeholder="Full Content"></textarea>
+          <input type="file" id="blogImage" accept="image/*">
+          <button onclick="addBlogPost()" class="btn">Publish</button>
+          <button onclick="cancelAddBlog()" class="btn btn-cancel">Cancel</button>
+        </div>
+        <div id="adminPostsList"></div>
+        <button onclick="logoutAdmin()" class="btn btn-delete">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Watson Atwell. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
